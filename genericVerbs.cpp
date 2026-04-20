@@ -1,3 +1,9 @@
+// ─────────────────────────────────────────────────────────────
+// Added Contribution:
+// This file handles user input related to generic verbs using
+// regex pattern matching. Each pattern maps user input to a
+// response template, helping simulate conversational behavior.
+// ─────────────────────────────────────────────────────────────
 #include "genericVerbs.h"
 #include <string>
 #include <regex>
