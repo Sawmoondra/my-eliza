@@ -2,16 +2,18 @@
 #include <string>
 #include <regex>
 #include <vector>
-#include <utility>   // for std::pair
-#include <algorithm> // for std::transform
+#include <utility>   // for pair
+#include <algorithm> // for transform
 #include <cctype>    // for ::tolower
+
+using namespace std;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helper: convert a string to lowercase for case-insensitive matching
 // ─────────────────────────────────────────────────────────────────────────────
-static std::string toLower(const std::string& s) {
-    std::string result = s;
-    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+static string toLower(const string& s) {
+    string result = s;
+    transform(result.begin(), result.end(), result.begin(), ::tolower);
     return result;
 }
 
@@ -22,7 +24,7 @@ static std::string toLower(const std::string& s) {
 //
 // Patterns are tried in order; the first match wins.
 // ─────────────────────────────────────────────────────────────────────────────
-static const std::vector<std::pair<std::string, std::string>> verbPatterns = {
+static const vector<pair<string, string>> verbPatterns = {
 
     // ── HAVE ──────────────────────────────────────────────────────────────────
     { "i have (a |an )?(.*)",
@@ -213,33 +215,33 @@ static const std::vector<std::pair<std::string, std::string>> verbPatterns = {
 // substitute capture groups into the response template.
 // Returns "" if somehow nothing matched (shouldn't happen with the catch-all).
 // ─────────────────────────────────────────────────────────────────────────────
-std::string handleGenericVerbs(const std::string& input) {
+string handleGenericVerbs(const string& input) {
 
     // Use case-insensitive flag for all matching
-    std::regex_constants::syntax_option_type flags =
-        std::regex_constants::ECMAScript | std::regex_constants::icase;
+    regex_constants::syntax_option_type flags =
+        regex_constants::ECMAScript | regex_constants::icase;
 
     for (const auto& entry : verbPatterns) {
-        const std::string& patternStr = entry.first;
-        const std::string& responseTemplate = entry.second;
+        const string& patternStr = entry.first;
+        const string& responseTemplate = entry.second;
 
         try {
-            std::regex pattern(patternStr, flags);
+            regex pattern(patternStr, flags);
 
             // Check if the pattern matches anywhere in the input
-            if (std::regex_search(input, pattern)) {
+            if (regex_search(input, pattern)) {
                 // Use regex_replace to substitute capture groups ($1, $2, etc.)
                 // into the response template
-                std::string response = std::regex_replace(
+                string response = regex_replace(
                     input,
                     pattern,
                     responseTemplate,
-                    std::regex_constants::format_first_only
+                    regex_constants::format_first_only
                 );
                 return response;
             }
         }
-        catch (const std::regex_error& e) {
+        catch (const regex_error& e) {
             // If a regex is malformed, skip it and continue
             continue;
         }
