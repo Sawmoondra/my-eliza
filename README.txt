@@ -16,7 +16,7 @@ HOW TO COMPILE
 ----------------------------------------------------------------
 On the UNT CSE CELL machines (or any Linux machine with g++):
 
-  g++ -std=c++17 -o myEliza main.cpp genericVerbs.cpp responseTracker.cpp
+  g++ -std=c++17 -o myEliza main.cpp genericVerbs.cpp responseTracker.cpp love.cpp concern.cpp entertainment.cpp
 
 If you are using a Makefile:
   make
