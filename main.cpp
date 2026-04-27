@@ -5,6 +5,9 @@
 
 #include "genericVerbs.h"
 #include "responseTracker.h"
+#include "love.h"
+#include "concern.h"
+#include "entertainment.h"
 
 using namespace std;
 
@@ -69,10 +72,25 @@ int main() {
         // ── Route to component handlers ───────────────────────────────────────
         // Milestone 1: only the generic verbs component is active.
         // Future milestones will add more handlers here (love, concern, etc.)
-        string response = handleGenericVerbs(userInput);
+
+        string response = handleConcern(userInput);
+
+        if (response.empty()) {
+            response = handleLove(userInput);
+        }
+
+        if (response.empty()) {
+            response = handleEntertainment(userInput);
+        }
+
+        if (response.empty()) {
+            response = handleGenericVerbs(userInput);
+        }
 
         cout << "ELIZA: " << response << "\n\n";
-    }
+        }
 
     return 0;
 }
+
+
