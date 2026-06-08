@@ -3,12 +3,6 @@
   CSCE Project 2 - Milestone 1
 ================================================================
 
-GROUP MEMBERS:
-    Aryal, Samundra     
-    Ghimire, Simran
-    Pokhrel, Bijaya
-    Byre ,Steven
-    Nguyen, Aaron 
   
 
 ----------------------------------------------------------------
